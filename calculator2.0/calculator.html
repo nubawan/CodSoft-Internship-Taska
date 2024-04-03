@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <meta http-equiv="X-UA-Compitible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto&display=swap"
+    rel="stylesheet">
+</head>
+
+<!-- calculator styling starts -->
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  :root {
+    --primary-color: rgb(0, 2, 138);
+    --secondary-color: yellow;
+    --logo-color: black;
+  }
+
+  body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ffffff 0%, #5899e2 74%);
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0px 20px 5px 10px;
+    color: var(--logo-color);
+  }
+
+  .Color {
+    color: var(--secondary-color);
+
+  }
+
+  .Calculator {
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5) inset, -5px -5px 5px rgba(0, 0, 0, 0.5)inset;
+  }
+
+  input {
+    background: transparent;
+    border: none;
+    margin: 10px;
+    padding: 20px;
+    background: transparent;
+    width: 100%;
+    font-size: larger;
+    text-align: right;
+    color: black;
+    font-weight: bolder;
+  }
+
+  .screen {
+    border: 1px black solid;
+    border-radius: 15px;
+    background: transparent;
+    margin-bottom: 19px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5) inset, -5px -5px 5px rgba(0, 0, 0, 0.5) inset;
+  }
+
+  input::placeholder {
+    color: black;
+    font-size: larger;
+    font-weight: bolder;
+  }
+
+  .btn-style {
+    border: none;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border-radius: 50%;
+    background: transparent;
+    color: red;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px rgba(143, 143, 143, .5) inset, -5px -5px 5px rgba(0, 0, 0, .5);
+    font-size: 1.5em;
+    font-weight: bolder;
+  }
+
+  .btn-style:hover {
+    background-color: yellow;
+    color: red;
+    font-size: 1.6em;
+  }
+
+  .equal {
+    background-color: burlywood;
+  }
+
+  .operator {
+    color: var(--primary-color);
+  }
+
+  .dark {
+    background: linear-gradient(45deg, #0a0a0a, #3a4452);
+    --primary-color: rgb(255, 255, 255);
+    --secondary-color: #66fcf1;
+    --logo-color: white;
+  }
+
+  #icon {
+    width: 40px;
+    margin: -5px 20px 2px 0px;
+    cursor: pointer;
+  }
+</style>
+<!-- calculator styling ends -->
+
+<!-- html code for Calculator starts-->
+
+<body>
+  <div class="Calculator">
+    <div class="top">
+      <div class="logo">Za<span class="Color">Y</span>aN</div>
+      <img src="/calculator2.0/dark theme icon/moon.png" id="icon">
+    </div>
+    <div class="screen"><input type="text" placeholder="0" id="inputBox"></div>
+    <div>
+      <button class="btn-style operator" type="button">AC</button>
+      <button class="btn-style operator" type="button">DEL</button>
+      <button class="btn-style operator" type="button">%</button>
+      <button class="btn-style operator" type="button">/</button>
+    </div>
+    <div>
+      <button class="btn-style" type="button">7</button>
+      <button class="btn-style" type="button">8</button>
+      <button class="btn-style" type="button">9</button>
+      <button class="btn-style operator" type="button">*</button>
+    </div>
+    <div>
+      <button class="btn-style" type="button">4</button>
+      <button class="btn-style" type="button">5</button>
+      <button class="btn-style" type="button">6</button>
+      <button class="btn-style operator" type="button">-</button>
+    </div>
+    <div>
+      <button class="btn-style" type="button">1</button>
+      <button class="btn-style" type="button">2</button>
+      <button class="btn-style" type="button">3</button>
+      <button class="btn-style operator" type="button">+</button>
+    </div>
+    <div>
+      <button class="btn-style" type="button">00</button>
+      <button class="btn-style" type="button">0</button>
+      <button class="btn-style" type="button">.</button>
+      <button class="btn-style equal" type="button">=</button>
+    </div>
+  </div>
+  <!-- html code for Calculator ends-->
+
+
+  <!-- js logic for calculation starts -->
+  <script>
+    let input = document.getElementById('inputBox');
+    let buttons = document.querySelectorAll('.btn-style');
+    let string = "";
+    let arr = Array.from(buttons);
+    arr.forEach(button => {
+      button.addEventListener('click', (e) => {
+        if (e.target.innerHTML == '=') {
+          string = eval(string);
+          input.value = string;
+        }
+        else if (e.target.innerHTML == 'AC') {
+          string = "";
+          input.value = string;
+        }
+        else if (e.target.innerHTML == 'DEL') {
+          string = string.substring(0, string.length - 1);
+          input.value = string;
+        }
+        else {
+          string += e.target.innerHTML;
+          input.value = string;
+        }
+      })
+    })
+  </script>
+  <!-- js logic for calculation starts ends -->
+
+  <!-- js for dark mode starts -->
+  <script>
+    var icon = document.getElementById('icon');
+    icon.onclick = function () {
+      document.body.classList.toggle("dark")
+      if (document.body.classList.contains("dark")) {
+        icon.src = "/calculator2.0/dark theme icon/sun.png";
+      } else {
+        icon.src = "/calculator2.0/dark theme icon/moon.png";
+      }
+
+    }
+  </script>
+  <!-- js for dark mode ends -->
+</body>
+
+</html>
